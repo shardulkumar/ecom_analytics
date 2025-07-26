@@ -1,0 +1,47 @@
+version: 2
+models:
+  - name: stg_orders
+    description: "Cleaned and enriched orders data from TPC-H"
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Customer identifier."
+        tests:
+          - not_null
+      - name: total_amount
+        description: "Total value of the order."
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: customer_name
+        description: "Name of the customer who place the order"
+  
+  - name: stg_customers
+    description: "Cleansed customer data."
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: "Customer full name."
+        tests:
+          - not_null
+
+  - name: stg_lineitem
+    description: "Cleased line item data."
+    columns:
+      - name: order_id
+        description: "Unique identifier of the order"
+        tests:
+          - not_null
+      - name: line_total
+        description: "Total value of the line item"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"

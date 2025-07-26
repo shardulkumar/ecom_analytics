@@ -5,14 +5,5 @@ sources:
     schema: TPCH_SF10
     tables:
       - name: ORDERS
-        freshness:
-        warn_after: { count: 24, period: hour }
-        error_after:: { count: 48, period: hour }
       - name: CUSTOMER
-        freshness:
-        warn_after: { count: 24, period: hour }
-        error_after:: { count: 48, period: hour }
       - name: LINEITEM
-        freshness:
-        warn_after: { count: 24, period: hour }
-        error_after:: { count: 48, period: hour }
